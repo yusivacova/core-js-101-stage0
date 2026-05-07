@@ -94,8 +94,20 @@ function getFirstChar(value) {
  *   'cat'              => 'cat'
  *   '\tHello, World! ' => 'Hello, World!'
  */
-function removeLeadingAndTrailingWhitespaces(/* value */) {
-  throw new Error('Not implemented');
+function removeLeadingAndTrailingWhitespaces(value) {
+  let newValue = value.replace('\t', ' ');
+
+  while (newValue[0] === ' ') {
+    newValue = newValue.slice(1);
+  }
+
+  const indexLast = newValue.length - 1;
+
+  if (newValue[indexLast] === ' ') {
+    newValue = newValue.slice(0, -1);
+  }
+
+  return newValue;
 }
 
 /**
@@ -200,8 +212,34 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let firstSide = '';
+  let secondSide = '';
+
+  for (let i = 1; i <= width; i += 1) {
+    if (i === 1) {
+      firstSide += '┌';
+      secondSide += '└';
+    } else if (i === width) {
+      firstSide += '┐\n';
+      secondSide += '┘\n';
+    } else {
+      firstSide += '─';
+      secondSide += '─';
+    }
+  }
+
+  let result = firstSide;
+
+  for (let i = 1; i <= height - 2; i += 1) {
+    const emptySpace = ' '.repeat(width - 2);
+    const midleSide = `│${emptySpace}│\n`;
+    result += midleSide;
+  }
+
+  result += secondSide;
+
+  return result;
 }
 
 /**
